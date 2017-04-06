@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+    
+    <entry>
+      <title><![CDATA[git的简单使用]]></title>
+      <url>%2F2017%2F04%2F06%2Fgit%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%2F</url>
+      <content type="text"><![CDATA[git的简单使用查看远程库信息，使用 1git remote -v; 本地新建的分支如果不推送到远程，对其他人就是不可见的; 从本地推送分支，使用 12git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交; 在本地创建和远程分支对应的分支，使用 本地和远程分支的名称最好一致; 1git checkout -b branch-name origin/branch-name， 建立本地分支和远程分支的关联，使用 1git branch --set-upstream branch-name origin/branch-name; 从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。 分支查看当前在哪个分支1git branch 切换分支1git checkout develop 合并分支1git merge --no-ff develop 创建分支 1git checkout -b feature-x develop 删除分支1git branch -d feature-x 如果想把本地的某个分支test提交到远程仓库，并作为远程仓库的master分支，或者作为另外一个名叫test的分支，那么可以这么做。12git push origin test:master // 提交本地test分支作为远程的master分支git push origin test:test // 提交本地test分支作为远程的test分支 1git push --set-upstream origin develop 提交本地分支到远程新的分支 如果想删除远程的分支呢？类似于上面，如果:左边的分支为空，那么将删除:右边的远程的分支。 1git push origin :test // 刚提交到远程的test将被删除，但是本地还会保存的，不用担心 Git回滚分支首先备份当前的master分支，防止回滚失败。 从origin master中新建一个分支，名称随便，比如，master_backup。 备份完成后，将master回滚到指定的版本,注意这个地方，是将本地的master分支回滚到指定的版本1git reset --hard commit-id 回滚本地master完成后，将回滚后的代码push到远端master，覆盖远端master分支。方法为：通过git命令，必须通过命令来，sourcetree的方式不可行。 1git push -f origin master。必须有-f，表示强制的意思。 此时，会要求用户输入远端仓库的用户名和密码，用于确认当前用户具有-f的权限。 push成功后，就可以删除备份的master了。sourcetree的方式也是不可以的1git branch -D master_backup tag 加标签添加标签 12git tag 0.1.0;git tag -a v0.1.2 -m “0.1.2版本” 发布标签12git push origin v0.1.2git push --tags 切换1git checkout [tagname] 删除1git tag -d v0.1.2 # 删除标签 删除远程标签1git push origin :refs/tags/标签名 git远程连接git删除远程连接1git remote rm origin 添加远程连接1git remote add origin 远程仓库地址 1git push --set-upstream origin master]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[从iOS转战JavaWeb]]></title>
+      <url>%2F2017%2F04%2F01%2F%E4%BB%8EiOS%E8%BD%AC%E6%88%98JavaWeb%2F</url>
+      <content type="text"><![CDATA[需要持续不段的学习才行hexo的简单命令12345678910111213hexo new&quot;postName&quot; #新建文章hexo new page&quot;pageName&quot; #新建页面hexo generate #生成静态页面至public目录hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）hexo deploy #将.deploy目录部署到GitHubhexo help # 查看帮助hexo version #查看Hexo的版本]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[出游小记]]></title>
+      <url>%2F2017%2F04%2F01%2Fhello-world%2F</url>
+      <content type="text"><![CDATA[贸然的一次出行突然间的放松电脑已经成为我的习惯，突然发现自己好像少了某些重要的东西–电脑，原来已经三天没摸电脑了，电脑已成为我生活的一部分了。但是出游让我学到了其他的存在。 生活随心长时间的办公室生活已经让我不知道改怎么释放自己，总是很在乎别人怎么看，好像自己是在为别人而活。看到一对夫妻在公园玩，高高兴兴的啃着北京方便面，然而有些人却扯着嘴角在笑，他们依然在到处游玩，不要为别人的想法而影响自己，在不影响公共秩序的情况下，做我们自己想做的事情，让自己开心的事情，何乐不为呢。看到某一个逗逼，把吃饭盒放在一个大酒缸的前面，旁边人来人往，自己放了5毛钱，让我给他拍照。我当时的第一想法是：丢不丢人啊，这么多人看着，照片我都不想拍，可是别人都不认识我，我怕什么呢。当然这只是一个最简单的解释，我们玩我们自己的，有没有影响到别人，管他怎么看呢，我开心就好，出来玩嘛本身就图个开心。其实我也想玩很多，但就是怕别人看到笑话，而不敢做，这不是违背了我们出来玩的初衷吗？这并不是没心没肺，只是在生活中腰做真实的自己。关心身边的人，这次被一个向导无微不至的照顾，让我无地自容啊，此处省略一万字。。。。。。 沟通这是人与人的社会，沟通无处不在，如果只有你一个人倒也显得无趣。鼓起勇气只要能开个头，就又可能聊下去，可能又多了一个朋友，或者增长一下见闻，毕竟每一个人的经历都是不同的。比如在飞机上，没手机可玩，大家要么睡觉，要么双眼无神的看着远方，其实和身边的人聊一聊，时间过的也挺快呢，还能了解一下别人的人经历，也有可能就多了一个人生中的朋友，说的庸俗一点，也有可能是你下一个发财的机会。 小结没有文彩，就当记一下流水账喽，发现自己的缺点，就要努力去攻克他，早上走向人生巅峰，赢取心爱的她。]]></content>
+    </entry>
+
+    
+  
+  
+</search>
