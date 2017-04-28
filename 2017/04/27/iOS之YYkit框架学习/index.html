@@ -97,7 +97,7 @@ YYCache — 高性能的 iOS 缓存框架。YYImage— 功能强大的 iOS 图�
 <meta property="og:description" content="iOS之YYkit框架学习YYKit 是一组庞大、功能丰富的 iOS 组件。为了尽量复用代码，这个项目中的某些组件之间有比较强的依赖关系。为了方便其他开发者使用，我从中拆分出以下独立组件：
 YYModel — 高性能的 iOS JSON 模型框架
 YYCache — 高性能的 iOS 缓存框架。YYImage— 功能强大的 iOS 图像框架。YYWebImage — 高性能的 iOS 异步图像加载">
-<meta property="og:updated_time" content="2017-04-27T07:46:04.000Z">
+<meta property="og:updated_time" content="2017-04-28T03:11:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS之YYkit框架学习">
 <meta name="twitter:description" content="iOS之YYkit框架学习YYKit 是一组庞大、功能丰富的 iOS 组件。为了尽量复用代码，这个项目中的某些组件之间有比较强的依赖关系。为了方便其他开发者使用，我从中拆分出以下独立组件：
@@ -409,7 +409,7 @@ YYCache — 高性能的 iOS 缓存框架。YYImage— 功能强大的 iOS 图�
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  754字
+                  868字
                 </span>
               
 
@@ -467,6 +467,10 @@ YYCache — 高性能的 iOS 缓存框架。YYImage— 功能强大的 iOS 图�
 </li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"># 创建YYCache对象(如果有很多对象都对应同一个文件夹，会导致缓存不稳定)</div><div class="line">  @param name 缓存文件夹的名称，一旦被创建我们就不应该对这个文件夹进行读写了(也就是我们应该     </div><div class="line">  用YYCache操作这个文件夹)</div><div class="line">+ (nullable instancetype)cacheWithName:(NSString *)name;</div><div class="line"></div><div class="line"># 判断是否缓存中`key`是否存在</div><div class="line">- (BOOL)containsObjectForKey:(NSString *)key;</div><div class="line"></div><div class="line">#  返回`key`对应的对象</div><div class="line">- (nullable id&lt;NSCoding&gt;)objectForKey:(NSString *)key;</div><div class="line"></div><div class="line"># 设置`key`对应的对象</div><div class="line">- (void)setObject:(nullable id&lt;NSCoding&gt;)object forKey:(NSString *)key;</div><div class="line"></div><div class="line">#  移除`key`对应的对象</div><div class="line">- (void)removeObjectForKey:(NSString *)key;</div></pre></td></tr></table></figure>
+<p>3.封装了一个网络请求累<br>具体思想是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">* 1.先加载缓存</div><div class="line">* 2.判断有没有网络</div><div class="line">* 3.如果没有网络则return</div><div class="line">* 4.有网，则继续请求，然后刷新内容，刷新缓存</div></pre></td></tr></table></figure>
+<p>具体实现:见我的github,欢迎star<br><a href="https://github.com/321zhangyang/SPHttpWithYYCache" target="_blank" rel="external">https://github.com/321zhangyang/SPHttpWithYYCache</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">添加 WZCHttp文件到你的工程;</div><div class="line"></div><div class="line">需要添加 pod &apos;AFNetworking&apos; pod &apos;YYCache&apos; 两个框架</div><div class="line"></div><div class="line">网络请求就比较简单了</div><div class="line"></div><div class="line">类方法:</div><div class="line"></div><div class="line">[WZCHttp postRequestUrl....]</div><div class="line"></div><div class="line">[WZCHttp getRequestUrl....]</div></pre></td></tr></table></figure>
 
       
     </div>
