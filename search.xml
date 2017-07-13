@@ -3,27 +3,6 @@
   
     
     <entry>
-      <title><![CDATA[理财投资]]></title>
-      <url>%2F2017%2F05%2F24%2F%E7%90%86%E8%B4%A2%E6%8A%95%E8%B5%84%2F</url>
-      <content type="text"><![CDATA[理财投资撸羊毛的人都知道，这个不多说，投资理财的人都知道，绝对可靠这个平台现在注册送1000元奖励金，和12%的加息劵，3天可撤资，获取加息劵，快来吧，时间有限 点这里 你就获得奖励金和加息劵http://t.cn/Ra81fLZ 我的截图]]></content>
-    </entry>
-
-    
-    <entry>
-      <title><![CDATA[苹果任务大量上线]]></title>
-      <url>%2F2017%2F05%2F24%2F%E8%8B%B9%E6%9E%9C%E4%BB%BB%E5%8A%A1%E5%A4%A7%E9%87%8F%E4%B8%8A%E7%BA%BF%2F</url>
-      <content type="text"><![CDATA[苹果任务大量上线我们郑重承诺，只需要你试玩app，不收取任何费用。这只是一个平台。 苹果必做1http://zk.xyou123.net/w/link/20462327新手随机红包（1-10元），大量任务在线。 苹果必做2http://wx.51zahuo.com/?u=2637450新手立即领取三元红包，一元既能体现到微信（16点到22点任务最多），请大家及时来刷任务，多劳多得，少劳少得。 苹果必做3http://www.xddkj.com/share.html?sf=ios&amp;sfrom=ios&amp;id=10299593新手填写我的邀请码立即获得5元红包（邀请码：S10299593），大量任务在线，期待你的到来。]]></content>
-    </entry>
-
-    
-    <entry>
-      <title><![CDATA[猎头必备基础知识]]></title>
-      <url>%2F2017%2F05%2F23%2F%E7%8C%8E%E5%A4%B4%E5%BF%85%E5%A4%87%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%2F</url>
-      <content type="text"></content>
-    </entry>
-
-    
-    <entry>
       <title><![CDATA[iOS之实际网络状态连接检测]]></title>
       <url>%2F2017%2F05%2F05%2FiOS%E4%B9%8B%E5%AE%9E%E9%99%85%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81%E8%BF%9E%E6%8E%A5%E6%A3%80%E6%B5%8B%2F</url>
       <content type="text"><![CDATA[iOS之实际网络状态连接检测网络连接状态检测对于我们的iOS app开发来说是一个非常通用的需求但事实上，基于此方案的所有实现，都无法帮助我们检测真正的网络连接状态，它们能检测的只是本地连接状态；如下场景就不能检测到: 1231. 现在很流行的公用wifi，需要网页鉴权，鉴权之前无法上网，但本地连接已经建立；2. 存在了本地网络连接，但信号很差，实际无法连接到服务器；3. iOS连接的路由设备本身没有连接外网。 [Reachability reachabilityWithHostName:]完全没用！ RealReachability简单介绍https://github.com/dustturtle/RealReachability可以办到多方研究后引入了ping能力（此方案流量开销最小，也最简单），实现了简单的实际网络连接监测 集成和使用介绍集成最简便的集成方法当属pod: pod ‘RealReachability’。 手动集成：将RealReachability文件夹加入到工程即可。 使用介绍其接口的设计和调用方法和Reachability非常相似，大家可以无缝上手，非常方便。 开启网络监听： 123 [GLobalRealReachability startNotifier]; [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkChanged:)name:kRealReachabilityChangedNotificationobject:nil]; 回调代码示例： 123456- (void)networkChanged:(NSNotification *)notification&#123; RealReachability *reachability = (RealReachability *)notification.object; ReachabilityStatus status = [reachability currentReachabilityStatus]; NSLog(@&quot;currentStatus:%@&quot;,@(status));&#125; 触发实时网络状态查询代码示例： 123456789101112131415161718192021222324[GLobalRealReachability reachabilityWithBlock:^(ReachabilityStatus status) &#123; switch (status) &#123; case NotReachable: &#123; // case NotReachable handler break; &#125; case ReachableViaWiFi: &#123; // case ReachableViaWiFi handler break; &#125; case ReachableViaWWAN: &#123; // case ReachableViaWWAN handler break; &#125; default: break; &#125; &#125;]; 查询当前实际网络连接状态： 1ReachabilityStatus status = [reachability currentReachabilityStatus]; realReachability架构概要图RealReachability主要包含3大模块：connection、ping、FSM； 其中Ping模块通过对同样是苹果提供的ping样例代码进行了封装，connection模块实现了基于SCNetworkReachability的本地状态检测，FSM模块是有限状态机。通过FSM的状态管理控制connection模块和Ping模块协同工作，并通过可配置的定时策略等业务逻辑优化，最终得到了我们的实现。 其中connection模块和ping模块也可独立使用，分别提供本地网络检测和ping的能力，感兴趣的读者也可以尝试（调用方式请参考RealReachability开源代码）。]]></content>
