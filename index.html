@@ -304,6 +304,290 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/13/iOS面试宝典/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WangZiChen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="起今知行 | 思考者">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/13/iOS面试宝典/" itemprop="url">
+                  iOS面试宝典
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-13T14:19:18+08:00">
+                2017-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/13/iOS面试宝典/" class="leancloud_visitors" data-flag-title="iOS面试宝典">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  7,894字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  28分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="block-和week的区别"><a href="#block-和week的区别" class="headerlink" title="block 和week的区别"></a>block 和week的区别</h1><ul>
+<li>block不管是在ARC下还是在MRC下都可以使用，可以修饰对象和基本数据类型，回调代码段，代替代理，</li>
+<li>week只能在ARC模式下使用，只能修饰对象string，而不能修饰基本数据类型</li>
+<li>block可以在block中重新赋值，week不可以</li>
+</ul>
+<h2 id="tableview滑动卡顿的问题"><a href="#tableview滑动卡顿的问题" class="headerlink" title="tableview滑动卡顿的问题"></a>tableview滑动卡顿的问题</h2><ul>
+<li>从缓存或者本地读取图片给UIimage的时候消耗的时间。</li>
+<li>把uiiage赋值给图片的时候要在主线程</li>
+<li>子线程中加入nstimer的时候需要手动添加nsrunloop，否则不能循环</li>
+<li>创建子线程时，GCD里面用_weak防止内存释放不了，循环引用</li>
+</ul>
+<h2 id="sd-webimage的实现原理"><a href="#sd-webimage的实现原理" class="headerlink" title="sd_webimage的实现原理"></a>sd_webimage的实现原理</h2><ul>
+<li>先显示ploceholder，然后sd开始根据url处理图片</li>
+<li>从缓存中SDwebiamgeCache中查看缓存中是否已经下载图片，</li>
+<li>已经下载，则调用SDwebiamgeCacheDelegate回调，SDwebiamgeManager回调显示前段图片</li>
+<li>如果没有则看硬盘中是否存在，根据urlkey，读取硬盘，如果有则添加到内存中，进而回调照片</li>
+<li>如果没有图片，则需要下载图片，sdwebiamgedownloader，用NSurlConnection来做，根据delegate来判断图片下载的中完成和失败</li>
+<li>图片下载完成后，回调给需要展示的地方，保存在内存和硬盘中<h2 id="网络请求状态码"><a href="#网络请求状态码" class="headerlink" title="网络请求状态码"></a>网络请求状态码</h2>302：请求重定向   500：服务器错误   400：请求连接错误或者找不到服务器   200以上是正确</li>
+</ul>
+<h2 id="子线程-dispatch-async"><a href="#子线程-dispatch-async" class="headerlink" title="子线程  dispatch-async"></a>子线程  dispatch-async</h2><p>GCD 网络数据的读取，数据库的读取，图片的下载，排序，耗时大的东西</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</div><div class="line">        //耗时操作</div><div class="line">        dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">            //更新界面</div><div class="line">        &#125;);</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<p>dispatch_group_async的使用<br>创建队列在队列中添加任务，当所有的任务都完成之后能发出通知</p>
+<h2 id="copy和retain的区别"><a href="#copy和retain的区别" class="headerlink" title="copy和retain的区别"></a>copy和retain的区别</h2><ul>
+<li>copy其实是建立一个相同的对象，retain不是</li>
+<li>copy是内容的copy，retain是指针的拷贝。（指针就是指向地址的变量）</li>
+<li>copy对于NSStrig的确是内容，但是对于NSArray呢，这时只是指向了array中相对元素的指针，这便是浅copy</li>
+</ul>
+<h2 id="objc的内存管理"><a href="#objc的内存管理" class="headerlink" title="objc的内存管理"></a>objc的内存管理</h2><p>??  如果您通过分配和初始化（比如[[MyClass alloc] init]）的方式来创建对象，您就拥<br>有这个对象，需要负责该对象的释放。这个规则在使用NSObject的便利方法new 时也同样适用。<br>??  如果您拷贝一个对象，您也拥有拷贝得到的对象，需要负责该对象的释放。<br>??  如果您保持一个对象，您就部分拥有这个对象，需要在不再使用时释放该对象。<br>反过来，<br>??  如果您从其它对象那里接收到一个对象，则您不拥有该对象，也不应该释放它（这个规则有少数<br>的例外，在参考文档中有显式的说明）。 </p>
+<h2 id="类工厂方法是什么"><a href="#类工厂方法是什么" class="headerlink" title="类工厂方法是什么"></a>类工厂方法是什么</h2><p>类工厂方法的实现是为了向客户提供方便，它们将分配和初始化合在一个步骤中，返回被创建的对象，并<br>进行自动释放处理。这些方法的形式是+ (type)className…（其中 className不包括任何前缀）。<br>工厂方法可能不仅仅为了方便使用。它们不但可以将分配和初始化合在一起，还可以为初始化过程提供对<br>象的分配信息。<br>类工厂方法的另一个目的是使类（比如NSWorkspace）提供单件实例。虽然init…方法可以确认一<br>个类在每次程序运行过程只存在一个实例，但它需要首先分配一个“生的”实例，然后还必须释放该实例。<br>工厂方法则可以避免为可能没有用的对象盲目分配内存。 </p>
+<h2 id="obj-c的优缺点"><a href="#obj-c的优缺点" class="headerlink" title="obj-c的优缺点"></a>obj-c的优缺点</h2><p>objc优点：<br>  1) Cateogies<br>  2) Posing<br>  3) 动态识别<br>  4) 指标计算<br>  5）弹性讯息传递<br>  6) 不是一个过度复杂的 C 衍生语言<br>  7) Objective-C 与 C++ 可混合编程<br>缺点:<br>  1) 不支援命名空间<br>  2)  不支持运算符重载<br>  3）<strong>不支持多重继承</strong>  不可以多重继承，可以遵守多个协议，来代替这个工能，继承可以增加修改删除原来的方法，换可以增加属性，<br>  4）使用动态运行时类型，所有的方法都是函数调用，所以很多编译时优化方法都用不到。（如内联函数等），性能低劣。 </p>
+<h2 id="readwrite，readonly，assign，retain，copy，nonatomic属性的作用"><a href="#readwrite，readonly，assign，retain，copy，nonatomic属性的作用" class="headerlink" title="readwrite，readonly，assign，retain，copy，nonatomic属性的作用"></a>readwrite，readonly，assign，retain，copy，nonatomic属性的作用</h2><p>@property是一个属性访问声明，扩号内支持以下几个属性：<br>1，getter=getterName，setter=setterName，设置setter与getter的方法名<br>2，readwrite,readonly，设置可供访问级别<br>2，assign，setter方法直接赋值，不进行任何retain操作，为了解决原类型与环循引用问题<br>3，retain，setter方法对参数进行release旧值再retain新值，所有实现都是这个顺序(CC上有相关资料)<br>4，copy，setter方法进行Copy操作，与retain处理流程一样，先旧值release，再Copy出新的对象，retainCount为1。这是为了减少对上下文的依赖而引入的机制。<br>copy是在你不希望a和b共享一块内存时会使用到。a和b各自有自己的内存。<br>5，nonatomic，非原子性访问，不加同步，多线程并发访问会提高性能。</p>
+<h2 id="什么是KVC和KVO？"><a href="#什么是KVC和KVO？" class="headerlink" title="什么是KVC和KVO？"></a>什么是KVC和KVO？</h2><p>答：KVC(Key-Value-Coding)内部的实现：一个对象在调用setValue的时候，（1）首先根据方法名找到运行方法的时候所需要的环境参数。（2）他会从自己isa指针结合环境参数，找到具体的方法实现的接口。（3）再直接查找得来的具体的方法实现。<br>KVO（Key-Value- Observing）：当观察者为一个对象的属性进行了注册，被观察对象的isa指针被修改的时候，isa指针就会指向一个中间类，而不是真实的类。所以 isa指针其实不需要指向实例对象真实的类。所以我们的程序最好不要依赖于isa指针。在调用类的方法的时候，最好要明确对象实例的类名</p>
+<h2 id="oc中的协议和java中的接口概念有何不同？"><a href="#oc中的协议和java中的接口概念有何不同？" class="headerlink" title="oc中的协议和java中的接口概念有何不同？"></a>oc中的协议和java中的接口概念有何不同？</h2><p>答案：OC中的代理有2层含义，官方定义为 formal和informal protocol。前者和Java接口一样。<br>informal protocol中的方法属于设计模式考虑范畴，不是必须实现的，但是如果有实现，就会改变类的属性。<br>其实关于正式协议，类别和非正式协议我很早前学习的时候大致看过，也写在了学习教程里<br>“非正式协议概念其实就是类别的另一种表达方式“这里有一些你可能希望实现的方法，你可以使用他们更好的完成工作”。<br>这个意思是，这些是可选的。比如我门要一个更好的方法，我们就会申明一个这样的类别去实现。然后你在后期可以直接使用这些更好的方法。<br>这么看，总觉得类别这玩意儿有点像协议的可选协议。”<br>现在来看，其实protocal已经开始对两者都统一和规范起来操作，因为资料中说“非正式协议使用interface修饰“，<br>现在我们看到协议中两个修饰词：“必须实现(@requied)”和“可选实现(@optional)”。</p>
+<h2 id="我们说的oc是动态运行时语言是什么意思？"><a href="#我们说的oc是动态运行时语言是什么意思？" class="headerlink" title="我们说的oc是动态运行时语言是什么意思？"></a>我们说的oc是动态运行时语言是什么意思？</h2><p>答案：多态。主要是将数据类型的确定由编译时，推迟到了运行时。<br>这个问题其实浅涉及到两个概念，运行时和多态。<br>简单来说，运行时机制使我们直到运行时才去决定一个对象的类别，以及调用该类别对象指定方法。<br>多态：不同对象以自己的方式响应相同的消息的能力叫做多态。意思就是假设生物类（life）都用有一个相同的方法-eat;<br>那人类属于生物，猪也属于生物，都继承了life后，实现各自的eat，但是调用是我们只需调用各自的eat方法。<br>也就是不同的对象以自己的方式响应了相同的消息（响应了eat这个选择器）。<br>因此也可以说，运行时机制是多态的基础？~~~</p>
+<h2 id="36NSOperation-queue"><a href="#36NSOperation-queue" class="headerlink" title="36NSOperation queue?"></a>36NSOperation queue?</h2><p>答案：存放NSOperation的集合类。<br>操作和操作队列，基本可以看成java中的线程和线程池的概念。用于处理ios多线程开发的问题。<br>网上部分资料提到一点是，虽然是queue，但是却并不是带有队列的概念，放入的操作并非是按照严格的先进现出。<br>这边又有个疑点是，对于队列来说，先进先出的概念是Afunc添加进队列，Bfunc紧跟着也进入队列，Afunc先执行这个是必然的，<br>但是Bfunc是等Afunc完全操作完以后，B才开始启动并且执行，因此队列的概念离乱上有点违背了多线程处理这个概念。<br>但是转念一想其实可以参考银行的取票和叫号系统。<br>因此对于A比B先排队取票但是B率先执行完操作，我们亦然可以感性认为这还是一个队列。<br>但是后来看到一票关于这操作队列话题的文章，其中有一句提到<br>“因为两个操作提交的时间间隔很近，线程池中的线程，谁先启动是不定的。”<br>瞬间觉得这个queue名字有点忽悠人了，还不如pool~<br>综合一点，我们知道他可以比较大的用处在于可以帮组多线程编程就好了。</p>
+<h2 id="HTTP协议详解"><a href="#HTTP协议详解" class="headerlink" title="HTTP协议详解"></a>HTTP协议详解</h2><p>HTTP是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。目前在WWW中使用的是HTTP/1.0的第六版，HTTP/1.1的规范化工作正在进行之中。</p>
+<p> http（超文本传输协议）是一个基于请求与响应模式的、无状态的、应用层的协议，常基于TCP的连接方式，HTTP1.1版本中给出一种持续连接的机制，绝大多数的Web开发，都是构建在HTTP协议之上的Web应用。<br>HTTP协议的主要特点可概括如下：<br>1.支持客户/服务器模式。<br>2.简单快速：客户向服务器请求服务时，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST。每种方法规定了客户与服务器联系的类型不同。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快。<br>3.灵活：HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记。<br>4.无连接：无连接的含义是限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即断开连接。采用这种方式可以节省传输时间。<br>5.无状态：HTTP协议是无状态协议。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。</p>
+<h2 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h2><p>HTTP URL (URL是一种特殊类型的URI是他的子类，包含了用于查找某个资源的足够的信息)的格式如下：<br><a href="http://host[&quot;:&quot;port][abs_path" target="_blank" rel="external">http://host[&quot;:&quot;port][abs_path</a>]<br>http表示要通过HTTP协议来定位网络资源；host表示合法的Internet主机域名或者IP地址；port指定一个端口号，为空则使用缺省端口80；abs_path指定请求资源的URI；如果URL中没有给出abs_path，那么当它作为请求URI时，必须以“/”的形式给出，通常这个工作浏览器自动帮我们完成。</p>
+<p>49TCP/UDP区别联系</p>
+<p>TCP—传输控制协议,提供的是面向连接、可靠的字节流服务。当客户和服务器彼此交换数据前，必须先在双方之间建立一个TCP连接，之后才能传输数据。TCP提供超时重发，丢弃重复数据，检验数据，流量控制等功能，保证数据能从一端传到另一端。 </p>
+<p>UDP—用户数据报协议，是一个简单的面向数据报的运输层协议。UDP不提供可靠性，它只是把应用程序传给IP层的数据报发送出去，但是并不能保证它们能到达目的地。由于UDP在传输数据报前不用在客户和服务器之间建立一个连接，且没有超时重发等机制，故而传输速度很快 </p>
+<p>TCP（Transmission Control Protocol，传输控制协议）是基于连接的协议，也就是说，在正式收发数据前，必须和对方建立可靠的连接。一个TCP连接必须要经过三次“对话”才能建立起来，我们来看看这三次对话的简单过程：1.主机A向主机B发出连接请求数据包；2.主机B向主机A发送同意连接和要求同步（同步就是两台主机一个在发送，一个在接收，协调工作）的数据包；3.主机A再发出一个数据包确认主机B的要求同步：“我现在就发，你接着吧！”，这是第三次对话。三次“对话”的目的是使数据包的发送和接收同步，经过三次“对话”之后，主机A才向主机B正式发送数据。<br>UDP（User Data Protocol，用户数据报协议）是与TCP相对应的协议。它是面向非连接的协议，它不与对方建立连接，而是直接就把数据包发送过去！  UDP适用于一次只传送少量数据、对可靠性要求不高的应用环境。<br>tcp协议和udp协议的差别<br>是否连接面向连接面向非连接<br>传输可靠性可靠不可靠<br>应用场合传输大量数据少量数据<br>速度慢快<br>50socket连接和http连接的区别</p>
+<p>简单说，你浏览的网页（网址以<a href="http://开头)都是http协议传输到你的浏览器的" target="_blank" rel="external">http://开头)都是http协议传输到你的浏览器的</a>, 而http是基于socket之上的。socket是一套完成tcp，udp协议的接口。<br>HTTP协议：简单对象访问协议，对应于应用层  ，HTTP协议是基于TCP连接的</p>
+<p>tcp协议：    对应于传输层</p>
+<p>ip协议：     对应于网络层<br>TCP/IP是传输层协议，主要解决数据如何在网络中传输；而HTTP是应用层协议，主要解决如何包装数据。</p>
+<p>Socket是对TCP/IP协议的封装，Socket本身并不是协议，而是一个调用接口（API），通过Socket，我们才能使用TCP/IP协议。</p>
+<p>http连接：http连接就是所谓的短连接，即客户端向服务器端发送一次请求，服务器端响应后连接即会断掉；</p>
+<p>socket连接：socket连接就是所谓的长连接，理论上客户端和服务器端一旦建立起连接将不会主动断掉；但是由于各种环境因素可能会是连接断开，比如说：服务器端或客户端主机down了，网络故障，或者两者之间长时间没有数据传输，网络防火墙可能会断开该连接以释放网络资源。所以当一个socket连接中没有数据的传输，那么为了维持连接需要发送心跳消息~~具体心跳消息格式是开发者自己定义的</p>
+<p>我们已经知道网络中的进程是通过socket来通信的，那什么是socket呢？socket起源于Unix，而Unix/Linux基本哲学之一就是“一切皆文件”，都可以用“打开open –&gt; 读写write/read –&gt; 关闭close”模式来操作。我的理解就是Socket就是该模式的一个实现，socket即是一种特殊的文件，一些socket函数就是对其进行的操作（读/写IO、打开、关闭），这些函数我们在后面进行介绍。我们在传输数据时，可以只使用（传输层）TCP/IP协议，但是那样的话，如果没有应用层，便无法识别数据内容，如果想要使传输的数据有意义，则必须使用到应用层协议，应用层协议有很多，比如HTTP、FTP、TELNET等，也可以自己定义应用层协议。WEB使用HTTP协议作应用层协议，以封装HTTP文本信息，然后使用TCP/IP做传输层协议将它发到网络上。<br>1)Socket是一个针对TCP和UDP编程的接口，你可以借助它建立TCP连接等等。而TCP和UDP协议属于传输层 。<br>  而http是个应用层的协议，它实际上也建立在TCP协议之上。<br> (HTTP是轿车，提供了封装或者显示数据的具体形式；Socket是发动机，提供了网络通信的能力。)</p>
+<p> 2）Socket是对TCP/IP协议的封装，Socket本身并不是协议，而是一个调用接口（API），通过Socket，我们才能使用TCP/IP协议。Socket的出现只是使得程序员更方便地使用TCP/IP协议栈而已，是对TCP/IP协议的抽象，从而形成了我们知道的一些最基本的函数接口。</p>
+<h2 id="套接字之间的连接过程分为三个步骤：服务器监听，客户端请求，连接确认。"><a href="#套接字之间的连接过程分为三个步骤：服务器监听，客户端请求，连接确认。" class="headerlink" title="套接字之间的连接过程分为三个步骤：服务器监听，客户端请求，连接确认。"></a>套接字之间的连接过程分为三个步骤：服务器监听，客户端请求，连接确认。</h2><p>1。服务器监听：服务器端套接字并不定位具体的客户端套接字，而是处于等待连接的状态，实时监控网络状态，等待客户端的连接请求。</p>
+<p>2。客户端请求：指客户端的套接字提出连接请求，要连接的目标是服务器端的套接字。为此，客户端的套接字必须首先描述它要连接的服务器的套接字，指出服务器端套接字的地址和端口号，然后就向服务器端套接字提出连接请求。</p>
+<p>3。连接确认：当服务器端套接字监听到或者说接收到客户端套接字的连接请求时，就响应客户端套接字的请求，建立一个新的线程，把服务器端套接字的描述发给客户端，一旦客户端确认了此描述，双方就正式建立连接。而服务器端套接字继续处于监听状态，继续接收其他客户端套接字的连接请求。</p>
+<h2 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h2><p>进程（process）是一块包含了某些资源的内存区域。操作系统利用进程把它的工作划分为一些功能单元。</p>
+<p>进程中所包含的一个或多个执行单元称为线程（thread）。进程还拥有一个私有的虚拟地址空间，该空间仅能被它所包含的线程访问。</p>
+<p>通常在一个进程中可以包含若干个线程，它们可以利用进程所拥有的资源。<br>在引入线程的操作系统中，通常都是把进程作为分配资源的基本单位，而把线程作为独立运行和独立调度的基本单位。<br>由于线程比进程更小，基本上不拥有系统资源，故对它的调度所付出的开销就会小得多，能更高效的提高系统内多个程序间并发执行的程度。<br>简而言之,一个程序至少有一个进程,一个进程至少有一个线程.一个程序就是一个进程，而一个程序中的多个任务则被称为线程。</p>
+<p>线程只能归属于一个进程并且它只能访问该进程所拥有的资源。当操作系统创建一个进程后，该进程会自动申请一个名为主线程或首要线程的线程。应用程序（application）是由一个或多个相互协作的进程组成的。<br>另外，进程在执行过程中拥有独立的内存单元，而多个线程共享内存，从而极大地提高了程序的运行效率。<br>线程在执行过程中与进程还是有区别的。每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口。但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制。<br>从逻辑角度来看，多线程的意义在于一个应用程序中，有多个执行部分可以同时执行。但操作系统并没有将多个线程看做多个独立的应用，来实现进程的调度和管理以及资源分配。这就是进程和线程的重要区别。</p>
+<p>进程是具有一定独立功能的程序关于某个数据集合上的一次运行活动,进程是系统进行资源分配和调度的一个独立单位.<br>线程是进程的一个实体,是CPU调度和分派的基本单位,它是比进程更小的能独立运行的基本单位.线程自己基本上不拥有系统资源,只拥有一点在运行中必不可少的资源(如程序计数器,一组寄存器和栈),但是它可与同属一个进程的其他的线程共享进程所拥有的全部资源.<br>一个线程可以创建和撤销另一个线程;同一个进程中的多个线程之间可以并发执行.</p>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p>多线程编程是防止主线程堵塞，增加运行效率等等的最佳方法。而原始的多线程方法存在很多的毛病，包括线程锁死等。在Cocoa中，Apple提供了NSOperation这个类，提供了一个优秀的多线程编程方法。<br>本次介绍NSOperation的子集，简易方法的NSInvocationOperation：</p>
+<p>一个NSOperationQueue 操作队列，就相当于一个线程管理器，而非一个线程。因为你可以设置这个线程管理器内可以并行运行的的线程数量等等</p>
+<h2 id="oc语法里的-perpoerty不用写-synzhesize了，自动填充了。并且的-name"><a href="#oc语法里的-perpoerty不用写-synzhesize了，自动填充了。并且的-name" class="headerlink" title="oc语法里的@perpoerty不用写@synzhesize了，自动填充了。并且的_name;"></a>oc语法里的@perpoerty不用写@synzhesize了，自动填充了。并且的_name;</h2><p>写方法时候不用提前声明。llvm 全局方法便利。<br>枚举类型。enum hello:Integer{  } 冒号后面直接可以跟类型，以前是：<br>enum hello{} 后面在指定为Integer .<br>桥接。ARC 自动release retain 的时候 CFString CFArray . Core Fountion. 加上桥接_brige  才能区分CFString 和NSString 而现在自动区分了，叫固定桥接。</p>
+<p>下拉刷新封装好了。<br>UICollectionViewController. 可以把表格分成多列。</p>
+<p>Social Framework(社交集成)<br>UIActivityViewController来询问用户的社交行为</p>
+<p>缓存：就是存放在临时文件里，比如新浪微博请求的数据，和图片，下次请求看这里有没有值。</p>
+<h2 id="堆和栈上的指针"><a href="#堆和栈上的指针" class="headerlink" title="堆和栈上的指针"></a>堆和栈上的指针</h2><p>指针所指向的这块内存是在哪里分配的,在堆上称为堆上的指针,在栈上为栈上的指针.<br>在堆上的指针,可以保存在全局数据结构中,供不同函数使用访问同一块内存.<br>在栈上的指针,在函数退出后,该内存即不可访问. </p>
+<h2 id="什么是指针的释放"><a href="#什么是指针的释放" class="headerlink" title="什么是指针的释放?"></a>什么是指针的释放?</h2><p>具体来说包括两个概念.<br>1 释放该指针指向的内存,只有堆上的内存才需要我们手工释放,栈上不需要.<br>2 将该指针重定向为NULL. </p>
+<h2 id="数据结构中的指针"><a href="#数据结构中的指针" class="headerlink" title="数据结构中的指针?"></a>数据结构中的指针?</h2><p>其实就是指向一块内存的地址,通过指针传递,可实现复杂的内存访问.<br>7 函数指针?<br>指向一块函数的入口地址. </p>
+<p>8 指针作为函数的参数?<br>比如指向一个复杂数据结构的指针作为函数变量<br>这种方法避免整个复杂数据类型内存的压栈出栈操作,提高效率.<br>注意:指针本身不可变,但指针指向的数据结构可以改变. </p>
+<p>9 指向指针的指针?<br>指针指向的变量是一个指针,即具体内容为一个指针的值,是一个地址.<br>此时指针指向的变量长度也是4位. </p>
+<h2 id="指针与地址的区别"><a href="#指针与地址的区别" class="headerlink" title="指针与地址的区别?"></a>指针与地址的区别?</h2><p>区别:<br>1指针意味着已经有一个指针变量存在,他的值是一个地址,指针变量本身也存放在一个长度为四个字节的地址当中,而地址概念本身并不代表有任何变量存在.<br>2 指针的值,如果没有限制,通常是可以变化的,也可以指向另外一个地址.<br>   地址表示内存空间的一个位置点,他是用来赋给指针的,地址本身是没有大小概念,指针指向变量的大小,取决于地址后面存放的变量类型.<br>62指针与数组名的关系? </p>
+<p>  其值都是一个地址,但前者是可以移动的,后者是不可变的. </p>
+<p>12 怎样防止指针的越界使用问题?<br>  <strong>必须让指针指向一个有效的内存地址,</strong><br>1 防止数组越界<br>2 防止向一块内存中拷贝过多的内容<br>3 防止使用空指针<br>4 防止改变const修改的指针<br>5 防止改变指向静态存储区的内容<br>6 防止两次释放一个指针<br>7 防止使用野指针. </p>
+<p>13 指针的类型转换?<br>指针转换通常是指针类型和void * 类型之前进行强制转换,从而与期望或返回void指针的函数进行正确的交接.<br>63static有什么用途？（请至少说明两种）<br>            1.限制变量的作用域<br>            2.设置变量的存储域</p>
+<pre><code>7. 引用与指针有什么区别？
+1) 引用必须被初始化，指针不必。
+2) 引用初始化以后不能被改变，指针可以改变所指的对象。
+2) 不存在指向空值的引用，但是存在指向空值的指针。
+8. 描述实时系统的基本特性
+在特定时间内完成特定的任务，实时性与可靠性
+</code></pre><h2 id="全局变量和局部变量在内存中是否有区别？如果有，是什么区别？"><a href="#全局变量和局部变量在内存中是否有区别？如果有，是什么区别？" class="headerlink" title="全局变量和局部变量在内存中是否有区别？如果有，是什么区别？"></a>全局变量和局部变量在内存中是否有区别？如果有，是什么区别？</h2><pre><code>全局变量储存在静态数据库，局部变量在堆栈
+10. 什么是平衡二叉树？
+左右子树都是平衡二叉树且左右子树的深度差值的绝对值不大于1
+</code></pre><p>65堆栈溢出一般是由什么原因导致的？<br>            没有回收垃圾资源</p>
+<pre><code>12. 什么函数不能声明为虚函数？
+constructor
+13. 冒泡排序算法的时间复杂度是什么？
+O(n^2)
+14. 写出float x 与“零值”比较的if语句。
+if(x&gt;0.000001&amp;&amp;x&lt;-0.000001)
+16. Internet采用哪种网络协议？该协议的主要层次结构？
+tcp/ip 应用层/传输层/网络层/数据链路层/物理层
+17. Internet物理地址和IP地址转换采用什么协议？
+ARP (Address Resolution Protocol)（地址解析協議）
+18.IP地址的编码分为哪俩部分？
+IP地址由两部分组成，网络号和主机号。不过是要和“子网掩码”按位与上之后才能区
+分哪些是网络位哪些是主机位。
+2.用户输入M,N值，从1至N开始顺序循环数数，每数到M输出该数值，直至全部输出。写
+出C程序。
+循环链表，用取余操作做
+3.不能做switch()的参数类型是：
+switch的参数不能为实型。
+華為
+1、局部变量能否和全局变量重名？
+答：能，局部会屏蔽全局。要用全局变量，需要使用&quot;::&quot;
+局部变量可以与全局变量同名，在函数内引用这个变量时，会用到同名的局部变量，而
+不会用到全局变量。对于有些编译器而言，在同一个函数内可以定义多个同名的局部变
+量，比如在两个循环体内都定义一个同名的局部变量，而那个局部变量的作用域就在那
+个循环体内
+2、如何引用一个已经定义过的全局变量？
+答：extern
+可以用引用头文件的方式，也可以用extern关键字，如果用引用头文件方式来引用某个
+在头文件中声明的全局变理，假定你将那个变写错了，那么在编译期间会报错，如果你
+用extern方式引用时，假定你犯了同样的错误，那么在编译期间不会报错，而在连接期
+间报错
+3、全局变量可不可以定义在可被多个.C文件包含的头文件中？为什么？
+答：可以，在不同的C文件中以static形式来声明同名全局变量。
+可以在不同的C文件中声明同名的全局变量，前提是其中只能有一个C文件中对此变量赋
+初值，此时连接不会出错
+4、语句for( ；1 ；)有什么问题？它是什么意思？
+答：和while(1)相同。
+5、do……while和while……do有什么区别？
+答：前一个循环一遍再判断，后一个判断以后再循环
+</code></pre><p>661.IP Phone的原理是什么?<br>            IPV6<br>            2.TCP/IP通信建立的过程怎样，端口有什么作用？<br>            三次握手，确定是哪个应用程序使用该协议<br>            3.1号信令和7号信令有什么区别，我国某前广泛使用的是那一种？<br>            4.列举5种以上的电话新业务？<br>            微软亚洲技术中心的面试题！！！<br>            1．进程和线程的差别。<br>            <strong>线程是指进程内的一个执行单元</strong>,也是进程内的可调度实体.<br>            与进程的区别:<br>            (1)调度：线程作为调度和分配的基本单位，进程作为拥有资源的基本单位<br>            (2)并发性：不仅进程之间可以并发执行，同一个进程的多个线程之间也可并发执行<br>            (3)拥有资源：进程是拥有资源的一个独立单位，线程不拥有系统资源，但可以访问隶属<br>            于进程的资源.<br>            (4)系统开销：在创建或撤消进程时，由于系统都要为之分配和回收资源，导致系统的开<br>            销明显大于创建或撤消线程时的开销。<br>            2.测试方法<br>            人工测试：个人复查、抽查和会审<br>            机器测试：黑盒测试和白盒测试<br>            2．Heap与stack的差别。<br>            Heap是堆，stack是栈。<br>            Stack的空间由操作系统自动分配/释放，Heap上的空间手动分配/释放。<br>            Stack空间有限，Heap是很大的自由存储区<br>            C中的malloc函数分配的内存空间即在堆上,C++中对应的是new操作符。<br>            程序在编译期对变量和函数分配内存都在栈上进行,且程序运行过程中函数调用时参数的<br>            传递也在栈上进行</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/05/iOS之实际网络状态连接检测/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2033,203 +2317,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/02/Linux的终端操作/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="WangZiChen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="起今知行 | 思考者">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/02/Linux的终端操作/" itemprop="url">
-                  Linux的终端操作
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-02T13:47:46+08:00">
-                2017-05-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/05/02/Linux的终端操作/" class="leancloud_visitors" data-flag-title="Linux的终端操作">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  651字
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  2分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="终端的基本操作"><a href="#终端的基本操作" class="headerlink" title="终端的基本操作"></a>终端的基本操作</h1><ol>
-<li>通过远程工具登陆到linux后，所在的位置是当前登录用户的家目录(home directory)。</li>
-<li>家目录的符号用~表示。</li>
-<li>linux的文件系统是一个树结构。<br>linux文件系统的树根成为根目录，使用符号”/“表示。<br>linux文件系统中使用符号”..”表示上级目录。<br>linux文件系统中使用符号”.”表示当前目录。<br>linux文件系统中，如果文件使用“.”开头，就表示隐藏文件<br>linux的路径表示方式有两种，一种是绝对路径(以”/“开头的路径)，一种是相对路径</li>
-<li>命令cd(change directory)：跳转到其他目录
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/02/Linux的终端操作/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2274,7 +2366,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
