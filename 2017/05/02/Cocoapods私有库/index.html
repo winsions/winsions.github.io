@@ -100,7 +100,7 @@ ReactiveCocoa发布了重大的更新，所以如果想使用最新版本的框�
 ReactiveCocoa发布了重大的更新，所以如果想使用最新版本的框架，我们需要注意一下问题。
 高级使用">
 <meta property="og:image" content="http://ois8kgfyr.bkt.clouddn.com/image/blog/14899759607600.jpg">
-<meta property="og:updated_time" content="2017-05-02T06:00:00.000Z">
+<meta property="og:updated_time" content="2018-03-27T10:16:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cocoapods私有库">
 <meta name="twitter:description" content="CocoaPods的使用方法简单使用pod init//编辑podFile文件内容,添加框架名称pod ‘BaiduMapKit’//执行安装命令pod install –no-repo-update
@@ -455,12 +455,14 @@ ReactiveCocoa发布了重大的更新，所以如果想使用最新版本的框�
 <h2 id="高级使用"><a href="#高级使用" class="headerlink" title="高级使用"></a>高级使用</h2><ol>
 <li><p>如果你只是纯 swift 项目，你继续使用 ReactiveCocoa 。但是 RAC 依赖于 ReactiveSwift ，等于你引入了两个库。这种情况下的podfile的文件如下:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use_frameworks!</div><div class="line">  target &apos;Target名称&apos; do</div><div class="line">  pod &apos;ReactiveCocoa&apos;, &apos;5.0.0-alpha.3&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
+<a id="more"></a>    
+<ol>
+<li>如果你的项目是纯 OC 项目，你需要使用的是 ReactiveObjC 。这个库里面包含原来 RAC 2 的全部代码。这种情况下的podfile的文件如下:</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use_frameworks!</div><div class="line">   target &apos;Target名称&apos; do</div><div class="line">   pod &apos;ReactiveObjC&apos;, &apos;~&gt; 2.1.0&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <ol>
-<li><p>如果你的项目是纯 OC 项目，你需要使用的是 ReactiveObjC 。这个库里面包含原来 RAC 2 的全部代码。这种情况下的podfile的文件如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">use_frameworks!</div><div class="line">   target &apos;Target名称&apos; do</div><div class="line">   pod &apos;ReactiveObjC&apos;, &apos;~&gt; 2.1.0&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
-</li>
 <li><p>如果你的项目是 Swift 和 OC 混编，你需要同时引用ReactiveCocoa 和 ReactiveObjCBridge 。但是 ReactiveObjCBridge 依赖于 ReactiveObjC ，所以你就等于引入了 4 个库。其中，ReactiveObjCBridge暂不支持cocoapods导入，需要手动导入！！<br>这种情况下的podfile的文件如下（注意，ReactiveObjCBridge手动导入就好啦）:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">use_frameworks!</div><div class="line">   target &apos;Target名称&apos; do</div><div class="line">   pod &apos;ReactiveObjC&apos;, &apos;~&gt; 2.1.0&apos;</div><div class="line">   pod &apos;ReactiveCocoa&apos;, &apos;5.0.0-alpha.3&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
 </li>
@@ -611,7 +613,7 @@ ReactiveCocoa发布了重大的更新，所以如果想使用最新版本的框�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

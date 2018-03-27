@@ -107,7 +107,7 @@ block可以在block中重新赋值，week不可以
 tableview滑动卡顿的问题
 从缓存或者本地读取图片给UIimage的时候消耗的时间。
 把uiiage赋值给图片的时候要在主">
-<meta property="og:updated_time" content="2017-07-13T14:37:25.000Z">
+<meta property="og:updated_time" content="2018-03-27T10:17:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS面试宝典">
 <meta name="twitter:description" content="block 和week的区别
@@ -446,9 +446,8 @@ tableview滑动卡顿的问题
 <li>从缓存或者本地读取图片给UIimage的时候消耗的时间。</li>
 <li>把uiiage赋值给图片的时候要在主线程</li>
 <li>子线程中加入nstimer的时候需要手动添加nsrunloop，否则不能循环</li>
-<li>创建子线程时，GCD里面用_weak防止内存释放不了，循环引用</li>
-</ul>
-<h2 id="sd-webimage的实现原理"><a href="#sd-webimage的实现原理" class="headerlink" title="sd_webimage的实现原理"></a>sd_webimage的实现原理</h2><ul>
+<li>创建子线程时，GCD里面用_weak防止内存释放不了，循环引用<a id="more"></a>
+<h2 id="sd-webimage的实现原理"><a href="#sd-webimage的实现原理" class="headerlink" title="sd_webimage的实现原理"></a>sd_webimage的实现原理</h2></li>
 <li>先显示ploceholder，然后sd开始根据url处理图片</li>
 <li>从缓存中SDwebiamgeCache中查看缓存中是否已经下载图片，</li>
 <li>已经下载，则调用SDwebiamgeCacheDelegate回调，SDwebiamgeManager回调显示前段图片</li>
@@ -686,7 +685,7 @@ switch的参数不能为实型。
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
