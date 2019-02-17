@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[继续我的博客]]></title>
+      <url>%2F2019%2F02%2F17%2F%E7%BB%A7%E7%BB%AD%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%2F</url>
+      <content type="text"><![CDATA[能不能坚持呢 是不是我们的]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[在Mac上搭建hexo博客]]></title>
       <url>%2F2018%2F03%2F27%2F%E5%9C%A8Mac%E4%B8%8A%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2%2F</url>
       <content type="text"><![CDATA[Mac上搭建基于Github的Hexo博客环境配置点击链接进入Node.js官网, 下载v5.5.0 Stable 一路安装即可。因为Xcode自带git，所以就没必要下了，如果没有安装的同学可以移步hexo官方文档去下载git. 安装Hexo当Node.js和git安装好，下面就需要安装Hexo了，终端执行以下命令 1sudo npm install -g hexo Hexo 初始化在桌面新建一个blog文件夹，然后cd 到那个目录下执行以下命令: 123hexo initnpm installhexo s 关联Github创建Github账号并新建项目项目名称为用户名.github.io的固定写法,如下图所示拷贝项目地址链接cd 到blog文件夹下,vim打开_config.yml，命令如下 1vim _config.yml 打开后滑倒最后，修改成下面的样子,下面的coding是我在codeing上新建的一个项目，因为在github上访问太慢，所以我新建了一个仓库。 123456deploy: type: git repository: github: https://github.com/jikaipenggithub/jikaipenggithub.github.io coding: https://git.coding.net/a751122452/a751122452.coding.me.git branch: master 注意：在配置所有的_config.yml文件时（包括theme中的），在所有的冒号:后边都要加一个空格，否则执行hexo命令会报错 修改完成之后保存退出，然后输入以下命令 123hexo cleanhexo ghexo d 当以上命令执行完成之后，在浏览器打开http://你的用户名.github.io，能看到和打开http://localhost:4000一样的页面。 安装主题Hexo官网主题页献给大家 大家可以去下载自己喜欢的主题去配置，以下以 hexo-theme-next 终端cd到 blog 目录下执行如下命令： 1git clone https://github.com/iissnan/hexo-theme-next themes/next 将blog目录下_config.yml里theme的名称landscape修改为next终端cd到blog目录下执行如下命令(每次部署文章的步骤)： 123$ hexo clean //清除缓存文件 (db.json) 和已生成的静态文件 (public)$ hexo g //生成缓存和静态文件$ hexo d //重新部署到服务器 绑定个人域名Github端 在/blog/themes/landscape/source目录下新建文件名为：CNAME文件，注意没有后缀名！直接将自己的域名如：kaipeng.net.cn写入,如果换主题需要在新的主题下面的source下重建CNAME,并写入域名。 域名解析如下图所示，蓝色箭头指的ip是我的github的仓库地址，你在终端ping一下就知道了，另外两个是coding的仓库地址，要是有不懂的滴滴我]]></content>
